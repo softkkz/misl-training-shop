@@ -13,6 +13,7 @@ public class StudentModel {
 	private String name;
 	private String surname;
 	private int age;
+	private String address;
 	
 	
 	public StudentModel() {
@@ -21,14 +22,23 @@ public class StudentModel {
 	}
 	
 	
-	public StudentModel(String stdId, String name, String surname, int age) {
+	public StudentModel(String stdId, String name, String surname, int age, String address) {
 		super();
 		this.stdId = stdId;
 		this.name = name;
 		this.surname = surname;
 		this.age = age;
+		this.address = address;
 	}
-	
+
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	
 	public String getStdId() {
 		return stdId;
@@ -54,10 +64,14 @@ public class StudentModel {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
+
+
+
+
 	@Override
 	public String toString() {
-		return "StudentModel [stdId=" + stdId + ", name=" + name + ", surname=" + surname + ", age=" + age + "]";
+		return "StudentModel [stdId=" + stdId + ", name=" + name + ", surname=" + surname + ", age=" + age
+				+ ", address=" + address + "]";
 	}
 	
 	

@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.training.shop.model.StudentModel;
 import it.training.shop.service.StudentService;
@@ -119,6 +121,50 @@ public class StudentController {
 		studentService.addStudent(student);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		
+	}
+	
+	
+	@GetMapping("/getStudentAge/{age}")
+	public ResponseEntity<List<StudentModel>> getStudentListByAge(@PathVariable int age){
+		
+		List<StudentModel> result = studentService.getStudentByAge(age);
+		
+		return ResponseEntity.ok(result);
+		
+	}
+	
+	@GetMapping("/getStudentAge/{age1}/{age2}")
+	public ResponseEntity<List<StudentModel>> getStudentListByAgeBetween(@PathVariable int age1,
+																		 @PathVariable int age2){
+		List<StudentModel> result = studentService.getStudentByAgeBetween(age1, age2);
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@GetMapping("/getStudent/{age}/{address}")
+	public ResponseEntity<List<StudentModel>> getStudentListByAgeAndAddress(@PathVariable int age,
+																		   @PathVariable String address){
+		List<StudentModel> result = studentService.getStudentByAgeAndAddress(age, address);
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	@PostMapping("/getStudentAge")
+	public ResponseEntity<List<StudentModel>> getStudentListByAge(@RequestParam String op,
+																  @RequestParam int age){
+		
+		List<StudentModel> result = studentService.getStudentByAge(age, op);
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	
+	
+	@PostMapping("/searchStudent")
+	public ResponseEntity<List<StudentModel>> searchStudent(@RequestParam String text,
+														    @RequestParam int type){
+		List<StudentModel> result = studentService.searchStudentByName(text, type);
+		return ResponseEntity.ok(result);
 	}
 	
 	
